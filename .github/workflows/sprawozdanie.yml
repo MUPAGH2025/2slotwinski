@@ -11,4 +11,4 @@ jobs:
       - run: python -m nbconvert --to pdf --execute cwiczenia_2.ipynb
       - uses: actions/upload-artifact@v4
         with:
-          path: lab2.pdf
+          path: anim.gif
