@@ -8,7 +8,7 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y texlive-xetex pandoc inkscape
       - run: pip install ipykernel scipy pint open_atmos_jupyter_utils matplotlib nbconvert
       - uses: actions/checkout@v4
-      - run: python -m nbconvert --to pdf --execute projekt/projekt_plytka_woda_Slotwinski.ipynb --output projekt_Slotwinski.pdf
+      - run: python -m nbconvert --to pdf --execute projekt1/projekt_plytka_woda_Slotwinski.ipynb --output projekt_Slotwinski.pdf
       - uses: actions/upload-artifact@v4
         with:
           path: projekt_Slotwinski.pdf
