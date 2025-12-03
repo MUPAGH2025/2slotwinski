@@ -11,5 +11,4 @@ jobs:
       - run: python -m nbconvert --to pdf --execute projekt1/projekt_plytka_woda_Slotwinski.ipynb --output-dir . --output projekt_Slotwinski
       - uses: actions/upload-artifact@v4
         with:
-          name: wynik-pdf  
           path: projekt_Slotwinski.pdf
