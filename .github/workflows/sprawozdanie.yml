@@ -6,14 +6,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: sudo apt-get update && sudo apt-get install -y texlive-xetex pandoc inkscape
+      - run: sudo apt-get install -y texlive-fonts-recommended texlive-plain-generic
+      
       - run: pip install ipykernel scipy pint open_atmos_jupyter_utils matplotlib nbconvert pympdata
       - uses: actions/checkout@v4
       
+      - run: python -m nbconvert --to latex --execute projekt1/projekt_plytka_woda_Slotwinski.ipynb --output-dir . --output projekt_Slotwinski
+  
+      - run: sed -i '/\\maketitle/d' projekt_Slotwinski.tex
       - run: |
-          echo "{% extends 'index.tex.j2' %}" > hide_title.j2
-          echo "{% block maketitle %}{% endblock maketitle %}" >> hide_title.j2
-
-      - run: python -m nbconvert --to pdf --template hide_title.j2 --execute projekt1/projekt_plytka_woda_Slotwinski.ipynb --output-dir . --output projekt_Slotwinski
+          xelatex -interaction=nonstopmode projekt_Slotwinski.tex
+          xelatex -interaction=nonstopmode projekt_Slotwinski.tex
       
       - uses: actions/upload-artifact@v4
         with:
