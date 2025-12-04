@@ -8,10 +8,13 @@ jobs:
       - run: sudo apt-get update && sudo apt-get install -y texlive-xetex pandoc inkscape
       - run: pip install ipykernel scipy pint open_atmos_jupyter_utils matplotlib nbconvert pympdata
       - uses: actions/checkout@v4
+      
       - run: |
           echo "((*- extends 'article.tplx' -*))" > hide_title.tplx
           echo "((* block maketitle *))((* endblock maketitle *))" >> hide_title.tplx
-      - run: python -m nbconvert --to pdf --execute projekt1/projekt_plytka_woda_Slotwinski.ipynb --output-dir . --output projekt_Slotwinski
+
+      - run: python -m nbconvert --to pdf --template hide_title.tplx --execute projekt1/projekt_plytka_woda_Slotwinski.ipynb --output-dir . --output projekt_Slotwinski
+      
       - uses: actions/upload-artifact@v4
         with:
           path: projekt_Slotwinski.pdf
